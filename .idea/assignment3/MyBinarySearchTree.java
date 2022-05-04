@@ -42,7 +42,7 @@ public class MyBinarySearchTree<K extends Comparable<K>, V> {
 
 
     public V get(K key) {
-        return null;
+        return get(root, key);
     }
 
     public Node delete(K key) {
