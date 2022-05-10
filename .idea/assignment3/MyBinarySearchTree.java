@@ -1,9 +1,5 @@
 package assignment3;
 
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.Queue;
-
 public class MyBinarySearchTree<K extends Comparable<K>, V> {
     private Node root;
     private class Node {
