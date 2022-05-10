@@ -4,7 +4,7 @@ public class MyHashTable<K, V> {
     private class HashNode<K, V> {
         private K key;
         private V value;
-        private HashNode<K, V> next;//eee
+        private HashNode<K, V> next;
 
         public HashNode(K key, V value) {
             this.key = key;
@@ -24,7 +24,7 @@ public class MyHashTable<K, V> {
 
     }
     public MyHashTable(int M) {
-
+        chainArray = new HashNode[M];
     }
     private int hash(K key) {
         return 0;
