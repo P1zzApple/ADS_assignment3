@@ -43,11 +43,16 @@ public class MyHashTable<K, V> {
     }
 
     private void put(K key, V value) {
-
+        HashNode t = new HashNode<>(key, value);
+        chainArray[hash(key)] = t;
     }
     public V get(K key) {
-        V _value;
-        _value = chainArray[hash(key)].value;
+        V _value = null;
+        try {
+            _value = chainArray[hash(key)].value;
+        }
+        catch (NullPointerException ignored) {
+        }
         return _value;
     }
 
@@ -56,10 +61,29 @@ public class MyHashTable<K, V> {
     }
 
     public boolean contains(V value) {
-        return true;
+        for (HashNode kvHashNode : chainArray) {
+            HashNode node = kvHashNode;
+            while (node != null) {
+                if (node.value.equals(value)) {
+                    return true;
+                }
+                node = node.next;
+            }
+        }
+        return false;
     }
 
     public K getKey(V value) {
+        for (int i = 0; i < chainArray.length; i++) {
+            HashNode node = chainArray[i];
+            while (node != null) {
+                if (node.value.equals(value)) {
+                    return (K) node.key;
+                }
+                node = node.next;
+            }
+        }
         return null;
+    }
     }
 }
