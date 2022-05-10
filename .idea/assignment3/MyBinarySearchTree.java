@@ -1,8 +1,9 @@
 package assignment3;
-// search
-// insert
-// delete
-// inorder traversal
+
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.Queue;
+
 public class MyBinarySearchTree<K extends Comparable<K>, V> {
     private Node root;
     private class Node {
@@ -20,21 +21,21 @@ public class MyBinarySearchTree<K extends Comparable<K>, V> {
     }
 
     public void put(K key, V value) {
-        root = insert(key, value);
+        root = putting(key, value);
     }
 
-    private Node insert(K key, V value) {
+    private Node putting(K key, V value) {
         if (root == null) {
             root = new Node(key);
             return root;
         }
 
         if (key.compareTo(root.key) < 0) {
-            root.left = insert(key, (V) root.left);
+            root.left = putting(key, (V) root.left);
         }
 
         else if (key.compareTo(root.key) > 0) {
-            root.right = insert(key, (V) root.right);
+            root.right = putting(key, (V) root.right);
         }
 
         return root;
@@ -43,6 +44,13 @@ public class MyBinarySearchTree<K extends Comparable<K>, V> {
 
     public V get(K key) {
         return get(root, key);
+    }
+
+    private V getting(Node root, K key) {
+        if (root == null) {return null;}
+        if (key.compareTo(root.key) < 0) {return getting(root.left, key);}
+        else if (key.compareTo(root.key) > 0) {return getting(root.right, key);}
+        return root.value;
     }
 
     public Node delete(K key) {
