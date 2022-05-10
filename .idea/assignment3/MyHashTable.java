@@ -46,6 +46,7 @@ public class MyHashTable<K, V> {
         HashNode t = new HashNode<>(key, value);
         chainArray[hash(key)] = t;
     }
+
     public V get(K key) {
         V _value = null;
         try {
@@ -57,6 +58,28 @@ public class MyHashTable<K, V> {
     }
 
     public V remove(K key) {
+        int i = hash(key);
+        HashNode tarray = chainArray[i];
+        if (tarray != null) {
+            HashNode newNode = tarray;
+            HashNode oldNode = null;
+            do {
+                HashNode t = newNode.next;
+                if (newNode.key.equals(key)) {
+                    if (oldNode != null) {
+                        oldNode.next = t;
+                    }
+                    else {
+                        tarray = t;
+                    }
+                }
+                oldNode = newNode;
+                newNode = t;
+            }
+            while (newNode != null);
+            chainArray[i] = tarray;
+            return null;
+        }
         return null;
     }
 
