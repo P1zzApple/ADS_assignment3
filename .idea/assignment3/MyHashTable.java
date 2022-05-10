@@ -16,31 +16,49 @@ public class MyHashTable<K, V> {
             return "{" + key + " " + value + "}";
         }
     }
+
     private HashNode<K, V>[] chainArray;
     private int M = 11;
     private int size;
 
     public MyHashTable() {
-
+        chainArray = new HashNode[11];
     }
+
     public MyHashTable(int M) {
         chainArray = new HashNode[M];
     }
-    private int hash(K key) {
-        return 0;
+
+    private char[] s;
+    public int hashCode() { // might need a fix
+        int hash = 0;
+        for (int i = 0; i < size; i++) {
+            hash = s[i] + (31 * hash);
+        }
+        return hash;
     }
+
+    private int hash(K key) {
+        return (key.hashCode() & 0x7fffffff) % M;
+    }
+
     private void put(K key, V value) {
 
     }
     public V get(K key) {
-        return null;
+        V _value;
+        _value = chainArray[hash(key)].value;
+        return _value;
     }
+
     public V remove(K key) {
         return null;
     }
+
     public boolean contains(V value) {
         return true;
     }
+
     public K getKey(V value) {
         return null;
     }
